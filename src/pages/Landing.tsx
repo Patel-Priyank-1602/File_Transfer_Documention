@@ -4,10 +4,127 @@ import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/ThemeProvider";
 import { useEffect, useRef, useState } from "react";
 
+const ContactForm = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("https://formspree.io/f/mwvkzdnv", {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        form.reset();
+      } else {
+        alert("There was a problem submitting your form. Please try again.");
+      }
+    } catch (error) {
+      alert("There was a problem submitting your form. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (isSubmitted) {
+    return (
+      <div className="text-center p-8 bg-primary/10 rounded-lg border border-primary/50">
+        <h3 className="text-xl font-semibold text-primary mb-2">Thank you!</h3>
+        <p className="text-muted-foreground">We've received your message and will get back to you soon.</p>
+        <Button 
+          variant="outline" 
+          className="mt-4"
+          onClick={() => setIsSubmitted(false)}
+        >
+          Send Another Message
+        </Button>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <label htmlFor="name" className="block text-sm font-medium mb-2 text-foreground">
+          Name
+        </label>
+        <input
+          id="name"
+          type="text"
+          name="name"
+          required
+          className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+          placeholder="Your name"
+        />
+      </div>
+
+      <div>
+        <label htmlFor="email" className="block text-sm font-medium mb-2 text-foreground">
+          Email
+        </label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          required
+          className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+          placeholder="your.email@example.com"
+        />
+      </div>
+
+      <div>
+        <label htmlFor="message" className="block text-sm font-medium mb-2 text-foreground">
+          Message
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          rows={5}
+          className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+          placeholder="Tell us what you're thinking..."
+        />
+      </div>
+
+      <Button 
+        type="submit" 
+        disabled={isSubmitting}
+        className="w-full"
+        size="lg"
+      >
+        {isSubmitting ? "Sending..." : "Send Message"}
+      </Button>
+    </form>
+  );
+};
+
 const Landing = () => {
   const { theme, setTheme } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
+
+  // Handle scroll to contact section on page load if hash is present
+  useEffect(() => {
+    if (window.location.hash === '#contact') {
+      setTimeout(() => {
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -193,6 +310,9 @@ const Landing = () => {
               <span className="font-semibold text-lg">FileTransfer</span>
             </Link>
             <div className="flex items-center gap-2">
+              <Button variant="outline" size="sm" asChild className="hidden sm:flex h-9">
+                <Link to="/docs/introduction">Documentation</Link>
+              </Button>
               <Button
                 variant="ghost"
                 size="icon"
@@ -203,7 +323,7 @@ const Landing = () => {
                 <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
               </Button>
               <Button variant="ghost" size="icon" asChild>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/Patel-Priyank-1602/File_Transfer.git" target="_blank" rel="noopener noreferrer">
                   <Github className="h-5 w-5" />
                 </a>
               </Button>
@@ -237,7 +357,7 @@ const Landing = () => {
                 </Link>
               </Button>
               <Button variant="outline" size="lg" asChild>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="gap-2">
+                <a href="https://github.com/Patel-Priyank-1602/File_Transfer.git" target="_blank" rel="noopener noreferrer" className="gap-2">
                   <Github className="h-4 w-4" />
                   Star on GitHub
                 </a>
@@ -291,14 +411,30 @@ const Landing = () => {
               <pre className="p-6 text-sm overflow-x-auto">
                 <code className="text-foreground">
                   <span className="text-muted-foreground"># Clone the repository</span>{"\n"}
-                  <span className="text-primary">git clone</span> {"<repository-url>"}{"\n"}
-                  <span className="text-primary">cd</span> local-file-transfer-server{"\n\n"}
+                  <span className="text-primary">git clone</span> {"https://github.com/Patel-Priyank-1602/File_Transfer.git"}{"\n"}
+                  <span className="text-primary">cd</span> File_Transfer{"\n\n"}
                   <span className="text-muted-foreground"># Install dependencies</span>{"\n"}
                   <span className="text-primary">pip install</span> -r requirements.txt{"\n\n"}
                   <span className="text-muted-foreground"># Start the server</span>{"\n"}
                   <span className="text-primary">python</span> app.py
                 </code>
               </pre>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Form Section */}
+        <section id="contact" className="py-20 px-4 border-t border-border/50 bg-card/30 backdrop-blur-sm scroll-mt-20">
+          <div className="max-w-2xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Send us a message</h2>
+              <p className="text-muted-foreground">
+                Fill out the form below and we'll get back to you soon.
+              </p>
+            </div>
+            
+            <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-lg p-6 md:p-8">
+              <ContactForm />
             </div>
           </div>
         </section>
@@ -324,7 +460,7 @@ const Landing = () => {
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
             <p>Copyright © {new Date().getFullYear()} Local Network File Transfer Server</p>
             <div className="flex items-center gap-4">
-              <a href="https://github.com" className="hover:text-foreground transition-colors">GitHub</a>
+              <a href="https://github.com/Patel-Priyank-1602/File_Transfer.git" className="hover:text-foreground transition-colors">GitHub</a>
               <Link to="/docs/introduction" className="hover:text-foreground transition-colors">Documentation</Link>
             </div>
           </div>

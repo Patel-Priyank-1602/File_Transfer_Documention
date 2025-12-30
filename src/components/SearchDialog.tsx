@@ -48,7 +48,6 @@ const iconMap: Record<string, any> = {
   performance: Gauge,
   recovery: RefreshCw,
   faq: HelpCircle,
-  roadmap: Map,
 };
 
 const SearchDialog = ({ open, onOpenChange }: SearchDialogProps) => {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, Search, X, Github, Server } from "lucide-react";
+import { Menu, Search, X, Github, Server, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
@@ -76,10 +76,20 @@ const DocHeader = () => {
               <Search className="h-4 w-4" />
             </Button>
             
+            <Button variant="ghost" size="icon" asChild className="sm:hidden h-9 w-9">
+              <Link to="/#contact">
+                <User className="h-4 w-4" />
+              </Link>
+            </Button>
+            
+            <Button variant="outline" size="sm" asChild className="hidden sm:flex h-9">
+              <Link to="/#contact">Contact</Link>
+            </Button>
+            
             <ThemeToggle />
             
             <Button variant="ghost" size="icon" asChild className="h-9 w-9">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/Patel-Priyank-1602/File_Transfer.git" target="_blank" rel="noopener noreferrer">
                 <Github className="h-4 w-4" />
               </a>
             </Button>
