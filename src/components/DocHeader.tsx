@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, Search, X, Github, Server, User } from "lucide-react";
+import { Menu, Search, X, Github, Server, User, Info } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
@@ -27,11 +27,11 @@ const DocHeader = () => {
                 <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                 <div className="px-4 py-4 border-b border-sidebar-border">
                   <Link to="/" className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
-                      <img
-                        src="/logo.png"
-                        alt="FileTransfer Logo"
-                        className="h-9 w-9 object-contain"
-                      />
+                    <img
+                      src="/logo.ico"
+                      alt="FileTransfer Logo"
+                      className="h-9 w-9 object-contain"
+                    />
                     <span className="font-semibold text-foreground">FileTransfer</span>
                   </Link>
                 </div>
@@ -42,11 +42,11 @@ const DocHeader = () => {
             </Sheet>
 
             <Link to="/" className="flex items-center gap-2">
-                      <img
-                        src="/logo.png"
-                        alt="FileTransfer Logo"
-                        className="h-9 w-9 object-contain"
-                      />
+              <img
+                src="/logo.ico"
+                alt="FileTransfer Logo"
+                className="h-9 w-9 object-contain"
+              />
               <span className="font-semibold hidden sm:inline-block">FileTransfer</span>
             </Link>
           </div>
@@ -75,19 +75,29 @@ const DocHeader = () => {
             >
               <Search className="h-4 w-4" />
             </Button>
-            
+
             <Button variant="ghost" size="icon" asChild className="sm:hidden h-9 w-9">
               <Link to="/#contact">
                 <User className="h-4 w-4" />
               </Link>
             </Button>
-            
+
             <Button variant="outline" size="sm" asChild className="hidden sm:flex h-9">
               <Link to="/#contact">Contact</Link>
             </Button>
-            
+
+            <Button variant="ghost" size="icon" asChild className="h-9 w-9 sm:hidden">
+              <Link to="/aboutme">
+                <Info className="h-4 w-4" />
+              </Link>
+            </Button>
+
+            <Button variant="outline" size="sm" asChild className="hidden sm:flex h-9">
+              <Link to="/aboutme">About Me</Link>
+            </Button>
+
             <ThemeToggle />
-            
+
             <Button variant="ghost" size="icon" asChild className="h-9 w-9">
               <a href="https://github.com/Patel-Priyank-1602/File_Transfer.git" target="_blank" rel="noopener noreferrer">
                 <Github className="h-4 w-4" />

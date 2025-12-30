@@ -42,8 +42,8 @@ const ContactForm = () => {
       <div className="text-center p-8 bg-primary/10 rounded-lg border border-primary/50">
         <h3 className="text-xl font-semibold text-primary mb-2">Thank you!</h3>
         <p className="text-muted-foreground">We've received your message and will get back to you soon.</p>
-        <Button 
-          variant="outline" 
+        <Button
+          variant="outline"
           className="mt-4"
           onClick={() => setIsSubmitted(false)}
         >
@@ -97,8 +97,8 @@ const ContactForm = () => {
         />
       </div>
 
-      <Button 
-        type="submit" 
+      <Button
+        type="submit"
         disabled={isSubmitting}
         className="w-full"
         size="lg"
@@ -108,7 +108,6 @@ const ContactForm = () => {
     </form>
   );
 };
-
 const Landing = () => {
   const { theme, setTheme } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -144,17 +143,22 @@ const Landing = () => {
 
     const draw = () => {
       if (!ctx || !canvas) return;
-      
+
       const width = window.innerWidth;
       const height = window.innerHeight;
-      
+
       ctx.clearRect(0, 0, width, height);
 
       const gridSize = 50;
       const glowRadius = 150; // Reduced from 200
 
-      // Draw base grid
-      ctx.strokeStyle = theme === "dark" ? "rgba(255, 255, 255, 0.03)" : "rgba(0, 0, 0, 0.03)";
+      // === Improved Base Grid Visibility ===
+      const baseGridOpacity = theme === "dark" ? 0.075 : 0.055;
+
+      ctx.strokeStyle = theme === "dark"
+        ? `rgba(255, 255, 255, ${baseGridOpacity})`
+        : `rgba(0, 0, 0, ${baseGridOpacity})`;
+
       ctx.lineWidth = 1;
 
       // Vertical lines
@@ -180,10 +184,10 @@ const Landing = () => {
           mousePos.x, mousePos.y, 0,
           mousePos.x, mousePos.y, glowRadius
         );
-        
-        gradient.addColorStop(0, "rgba(16, 185, 129, 0.12)"); // Reduced from 0.2
-        gradient.addColorStop(0.3, "rgba(16, 185, 129, 0.06)"); // Reduced from 0.1
-        gradient.addColorStop(0.6, "rgba(16, 185, 129, 0.02)"); // Reduced from 0.03
+
+        gradient.addColorStop(0, "rgba(16, 185, 129, 0.22)");
+        gradient.addColorStop(0.35, "rgba(16, 185, 129, 0.12)");
+        gradient.addColorStop(0.6, "rgba(16, 185, 129, 0.05)");
         gradient.addColorStop(1, "rgba(16, 185, 129, 0)");
 
         ctx.fillStyle = gradient;
@@ -193,7 +197,7 @@ const Landing = () => {
 
         // Highlight nearby grid lines - reduced opacity
         ctx.lineWidth = 1.5;
-        
+
         // Find grid intersections near cursor
         const startX = Math.floor((mousePos.x - glowRadius) / gridSize) * gridSize;
         const endX = Math.ceil((mousePos.x + glowRadius) / gridSize) * gridSize;
@@ -204,8 +208,8 @@ const Landing = () => {
         for (let x = startX; x <= endX; x += gridSize) {
           if (x < 0 || x > width) continue;
           const distance = Math.abs(x - mousePos.x);
-          const opacity = Math.max(0, 1 - distance / glowRadius) * 0.25; // Reduced from 0.4
-          
+          const opacity = Math.max(0, 1 - distance / glowRadius) * 0.6;
+
           ctx.strokeStyle = `rgba(16, 185, 129, ${opacity})`;
           ctx.beginPath();
           ctx.moveTo(x, Math.max(0, startY));
@@ -218,7 +222,7 @@ const Landing = () => {
           if (y < 0 || y > height) continue;
           const distance = Math.abs(y - mousePos.y);
           const opacity = Math.max(0, 1 - distance / glowRadius) * 0.25; // Reduced from 0.4
-          
+
           ctx.strokeStyle = `rgba(16, 185, 129, ${opacity})`;
           ctx.beginPath();
           ctx.moveTo(Math.max(0, startX), y);
@@ -302,11 +306,11 @@ const Landing = () => {
         <header className="border-b border-border/50 backdrop-blur-sm bg-background/80">
           <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2">
-                <img
-                  src="/logo.png"
-                  alt="FileTransfer Logo"
-                  className="h-9 w-9 object-contain"
-                />
+              <img
+                src="/logo.ico"
+                alt="FileTransfer Logo"
+                className="h-9 w-9 object-contain"
+              />
               <span className="font-semibold text-lg">FileTransfer</span>
             </Link>
             <div className="flex items-center gap-2">
@@ -331,34 +335,53 @@ const Landing = () => {
           </div>
         </header>
 
-        {/* Hero */}
+        {/* Hero Section - UPDATED STYLE */}
         <section className="py-20 md:py-32 px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/80 backdrop-blur-sm text-sm text-muted-foreground mb-6">
-              <span className="flex h-2 w-2 rounded-full bg-primary animate-pulse" />
-              Production-Grade Solution
-            </div>
-            
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 text-foreground">
-              Local Network File Transfer
-              <span className="text-primary"> Server</span>
+          <div className="max-w-5xl mx-auto text-center">
+
+            {/* Title updated to match the block/stacked style of the image */}
+            <h1 className="flex flex-col items-center gap-0 mb-10 font-black uppercase tracking-tighter leading-[0.92]
+               text-[2.75rem] sm:text-[3.75rem] md:text-[4.75rem] lg:text-[5.75rem]">
+
+              {/* Top glow */}
+              <span
+                className="block text-foreground
+                          drop-shadow-[0_0_14px_rgba(16,185,129,0.35)]
+                          transition-all duration-300"
+              >
+                Local
+              </span>
+
+              {/* Sharp center */}
+              <span className="block text-primary italic transform -skew-x-6">
+                Network
+              </span>
+
+              {/* Bottom glow */}
+              <span
+                className="block text-foreground
+                          drop-shadow-[0_0_18px_rgba(16,185,129,0.45)]
+                          transition-all duration-300"
+              >
+                Transfers
+              </span>
             </h1>
-            
+
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-              A high-performance file sharing and collaboration system built with Python and Flask. 
+              A high-performance file sharing and collaboration system built with Python and Flask.
               Secure, reliable, and fully offline.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button asChild size="lg" className="gap-2">
+              <Button asChild size="lg" className="gap-2 h-12 px-8 text-lg">
                 <Link to="/docs/introduction">
                   Get Started
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-5 w-5" />
                 </Link>
               </Button>
-              <Button variant="outline" size="lg" asChild>
+              <Button variant="outline" size="lg" asChild className="h-12 px-8 text-lg">
                 <a href="https://github.com/Patel-Priyank-1602/File_Transfer.git" target="_blank" rel="noopener noreferrer" className="gap-2">
-                  <Github className="h-4 w-4" />
+                  <Github className="h-5 w-5" />
                   Star on GitHub
                 </a>
               </Button>
@@ -375,7 +398,7 @@ const Landing = () => {
                 Everything you need for enterprise-grade file sharing on local networks.
               </p>
             </div>
-            
+
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {features.map((feature, index) => (
                 <div
@@ -400,7 +423,7 @@ const Landing = () => {
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Quick Setup</h2>
               <p className="text-muted-foreground">Get started in minutes with a simple installation.</p>
             </div>
-            
+
             <div className="bg-secondary/50 backdrop-blur-sm border border-border/50 rounded-lg overflow-hidden">
               <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-secondary/80">
                 <span className="h-3 w-3 rounded-full bg-red-500/80" />
@@ -432,7 +455,7 @@ const Landing = () => {
                 Fill out the form below and we'll get back to you soon.
               </p>
             </div>
-            
+
             <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-lg p-6 md:p-8">
               <ContactForm />
             </div>
