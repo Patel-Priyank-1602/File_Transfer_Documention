@@ -307,7 +307,7 @@ const Landing = () => {
           <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2">
               <img
-                src="/logo.ico"
+                src="/logo.webp"
                 alt="FileTransfer Logo"
                 className="h-9 w-9 object-contain"
               />

@@ -51,7 +51,7 @@ const AboutMe = () => {
                     <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
                         <Link to="/" className="flex items-center gap-2">
                             <img
-                                src="/logo.ico"
+                                src="/logo.webp"
                                 alt="FileTransfer Logo"
                                 className="h-9 w-9 object-contain"
                             />
@@ -96,7 +96,7 @@ const AboutMe = () => {
                                 <div className="relative">
                                     <div className="w-40 h-40 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border-2 border-primary/30 flex items-center justify-center overflow-hidden">
                                         <img
-                                            src="/Priyank.jpg"
+                                            src="/Priyank.webp"
                                             alt="Priyank Patel"
                                             className="w-full h-full object-cover"
                                         />
@@ -232,7 +232,7 @@ const AboutMe = () => {
                                 <div className="relative">
                                     <div className="w-24 h-24 rounded-full border-2 border-primary/40 overflow-hidden bg-primary/10">
                                         <img
-                                            src="/Panth.jpg"
+                                            src="/Panth.webp"
                                             alt="Panth"
                                             className="w-full h-full object-cover"
                                         />

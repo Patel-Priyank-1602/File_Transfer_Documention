@@ -28,7 +28,7 @@ const DocHeader = () => {
                 <div className="px-4 py-4 border-b border-sidebar-border">
                   <Link to="/" className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
                     <img
-                      src="/logo.ico"
+                      src="/logo.webp"
                       alt="FileTransfer Logo"
                       className="h-9 w-9 object-contain"
                     />
@@ -43,7 +43,7 @@ const DocHeader = () => {
 
             <Link to="/" className="flex items-center gap-2">
               <img
-                src="/logo.ico"
+                src="/logo.webp"
                 alt="FileTransfer Logo"
                 className="h-9 w-9 object-contain"
               />
