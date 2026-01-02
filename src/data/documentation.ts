@@ -19,6 +19,7 @@ export const navigation: { category: string; items: NavItem[] }[] = [
     items: [
       { id: "introduction", title: "Introduction", icon: "Home" },
       { id: "installation", title: "Installation", icon: "Download" },
+      { id: "network-setup", title: "Network Setup", icon: "RefreshCw" },
       { id: "configuration", title: "Configuration", icon: "Settings" },
     ],
   },
@@ -128,6 +129,97 @@ After installation, proceed to the Configuration section to set up your environm
       { id: "quick-start", title: "Quick Start" },
     ],
   },
+
+  "network-setup": {
+    id: "network-setup",
+    title: "Network Setup",
+    icon: "RefreshCw",
+    content: `
+# Network Configuration Guide
+
+Choose the network setup method that best fits your environment. The system supports three connection modes.
+
+## WiFi Network
+
+**Best for**: Existing WiFi networks where all devices are already connected
+
+### Setup Steps
+
+1. **Connect all devices** to the same WiFi network
+2. **Find your server IP address**:
+   - **Windows**: Open Command Prompt and run \`ipconfig\`
+   - **macOS/Linux**: Open Terminal and run \`ifconfig\` or \`ip addr\`
+3. **Note your IPv4 address** (e.g., 192.168.1.100)
+4. **Configure .env file** with your WiFi IP address
+5. **Run the server**: \`python app.py\`
+6. **Access from other devices**: Open browser and navigate to \`http://YOUR_IP:8000\`
+
+### Benefits
+✓ No hotspot needed  
+✓ Direct connection  
+✓ Stable and fast  
+✓ Works with existing network infrastructure  
+
+## Ethernet with Hotspot
+
+**Best for**: Server on wired connection, clients on mobile devices
+
+### Setup Steps
+
+1. **Connect server** to Ethernet cable
+2. **Enable mobile hotspot** on your server device:
+   - **Windows**: Settings → Network & Internet → Mobile hotspot
+   - **macOS**: System Preferences → Sharing → Internet Sharing
+3. **Find your hotspot IP** using \`ipconfig\` (Windows) or \`ifconfig\` (macOS/Linux)
+4. **Configure .env file** with hotspot details:
+   - HOTSPOT_SSID (your hotspot name)
+   - HOTSPOT_PASSWORD (your hotspot password)
+   - HOTSPOT_IP (your IP address on the hotspot interface)
+5. **Run the server**: \`python app.py\`
+6. **Client devices**: 
+   - Scan the QR code displayed on server dashboard
+   - Connect to the hotspot WiFi network
+   - Browser will automatically open the server URL
+
+### Benefits
+✓ Easy client onboarding via QR code  
+✓ Works without existing WiFi network  
+✓ Portable solution  
+
+## Network Verification
+
+After configuring your network, verify connectivity:
+
+\`\`\`bash
+# Ping test from client device
+ping YOUR_SERVER_IP
+
+# Access test
+curl http://YOUR_SERVER_IP:8000
+\`\`\`
+
+## Troubleshooting
+
+**Cannot connect to server:**
+- Verify all devices are on the same network
+- Check firewall settings allow port 8000
+- Ensure server IP is correct
+- Try disabling VPN on client devices
+
+**Slow transfer speeds:**
+- Use 5GHz WiFi band instead of 2.4GHz
+- Reduce distance between devices
+- Check for network congestion
+- Consider using Ethernet for server
+    `,
+    subsections: [
+      { id: "wifi-network", title: "WiFi Network" },
+      { id: "ethernet-with-hotspot", title: "Ethernet with Hotspot" },
+      { id: "network-verification", title: "Network Verification" },
+      { id: "troubleshooting", title: "Troubleshooting" },
+    ],
+  },
+
   configuration: {
     id: "configuration",
     title: "Configuration",
