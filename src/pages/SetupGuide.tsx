@@ -22,7 +22,7 @@ const SetupGuide = () => {
             title: "Clone the Repository",
             description: "First, clone the FileTransfer repository from GitHub to your local machine...",
             command: "git clone https://github.com/Patel-Priyank-1602/File_Transfer.git\ncd File_Transfer",
-            image: "/setup/clone.png",
+            image: "/setup/clone.webp",
             tips: [
                 "Make sure Git is installed on your system",
                 "Choose a directory where you want to store the project"
@@ -33,7 +33,7 @@ const SetupGuide = () => {
             title: "Install Dependencies",
             description: "Install all required Python packages...",
             command: "pip install -r requirements.txt",
-            image: "/setup/req.png",
+            image: "/setup/req.webp",
             tips: [
                 "Python 3.8 or higher is required",
                 "Consider using a virtual environment for isolation"
@@ -44,7 +44,7 @@ const SetupGuide = () => {
             title: "Find Your IP Address",
             description: "Locate your local network IP address so other devices can connect to your server.",
             command: "ipconfig   // Windows\nifconfig   // macOS / Linux",
-            image: "/setup/ip.png",
+            image: "/setup/ip.webp",
             tips: [
                 "Open Command Prompt (Windows) or Terminal (macOS/Linux)",
                 "Run the command and find the **IPv4 Address**",
@@ -57,7 +57,7 @@ const SetupGuide = () => {
             title: "Environment Configuration",
             description: "Create a `.env` file in the project root and configure the application settings.",
             command: "# --- Network / Hotspot Settings ---\nHOTSPOT_SSID=YourHotspotName\nHOTSPOT_PASSWORD=YourHotspotPassword\nHOTSPOT_IP=YourHotspotIP\nPORT=8000\n\n# --- Admin Credentials ---\nADMIN_USERNAME=admin\nADMIN_PASSWORD=your_secure_password\n\n# --- Application Settings ---\nSECRET_KEY=change_this_to_a_random_secure_value\nUPLOAD_FOLDER=shared_files",
-            image: "/setup/env.png",
+            image: "/setup/env.webp",
             tips: [
                 "Never share your `.env` file publicly or commit it to GitHub",
                 "Restart the server after modifying the `.env` file",
@@ -68,7 +68,7 @@ const SetupGuide = () => {
             icon: FolderTree,
             title: "Verify Project Folder Structure",
             description: "Make sure all required project files and folders are present before running the server.",
-            image: "/setup/fs.png",
+            image: "/setup/fs.webp",
             tips: [
                 "Confirm that `app.py`, `requirements.txt`, `.env`, and the `templates` folder exist",
                 "Your folder structure should match the project documentation",
@@ -111,7 +111,7 @@ const SetupGuide = () => {
             icon: Power ,
             title: "Start the Server",
             description: "Launch the FileTransfer server and make it accessible on your local network.",
-            image: "/setup/rng.png",
+            image: "/setup/rng.webp",
             command: "python app.py",
             tips: [
                 "Make sure all dependencies are installed before starting the server",
@@ -125,7 +125,7 @@ const SetupGuide = () => {
             icon: ShieldCheck ,
             title: "Login to the Admin Dashboard",
             description: "Access the admin panel to manage users, files, and system activity.",
-            image: "/setup/login.png",
+            image: "/setup/login.webp",
             tips: [
                 "Open the server dashboard at `http://127.0.0.1:8000`",
                 "Log in using the admin credentials configured in your `.env` file",
@@ -137,7 +137,7 @@ const SetupGuide = () => {
             icon: LayoutDashboard ,
             title: "Open Admin Dashboard",
             description: "Use the FileTransfer Admin Dashboard to manage users, files, and monitor system activity.",
-            image: "/setup/server.png",
+            image: "/setup/server.webp",
             tips: [
                 "Step 1: Connect devices using the **Connect to Hotspot** QR code (skip this if already on the same network)",
                 "Step 2: Connect client devices using the **Open File Server** QR code or copy the file server URL shown at the top of the File Management page",
@@ -149,7 +149,7 @@ const SetupGuide = () => {
             icon: QrCode ,
             title: "Open Client Dashboard using QR Code or URL",
             description: "Access the FileTransfer Client Dashboard to upload, download, and manage shared files.",
-            image: "/setup/client.png",
+            image: "/setup/client.webp",
             tips: [
                 "Before opening the client dashboard, you will see a login page — enter the credentials from your `.env` file and provide a display name",
                 "For complete usage instructions and advanced features, refer to the FileTransfer Client documentation at **lftdocs.netlify.app**"
