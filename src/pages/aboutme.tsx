@@ -94,15 +94,22 @@ const AboutMe = () => {
                             <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-12">
                                 {/* Profile Image */}
                                 <div className="relative">
-                                    <div className="w-40 h-40 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border-2 border-primary/30 flex items-center justify-center overflow-hidden">
+                                    <div className="absolute inset-0 rounded-3xl bg-primary/20 blur-xl" />
+                                    <div className="
+      relative
+      w-48 h-48 
+      md:w-56 md:h-56 
+      rounded-3xl 
+      bg-gradient-to-br from-primary/20 to-primary/5 
+      border-2 border-primary/40 
+      overflow-hidden 
+      shadow-xl
+    ">
                                         <img
                                             src="/Priyank.webp"
                                             alt="Priyank Patel"
                                             className="w-full h-full object-cover"
                                         />
-                                    </div>
-                                    <div className="absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-primary flex items-center justify-center border-4 border-background">
-                                        <Code2 className="h-6 w-6 text-primary-foreground" />
                                     </div>
                                 </div>
 
