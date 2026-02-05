@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Menu, Search, Github, Wrench, Mail, IdCard  } from "lucide-react";
+import { Menu, Search, Github, Wrench, Mail, IdCard, ImageIcon  } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import DocSidebar from "./DocSidebar";
 import SearchDialog from "./SearchDialog";
 import { ThemeToggle } from "./ThemeToggle";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 
 const DocHeader = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -51,10 +52,39 @@ const DocHeader = () => {
               </SheetContent>
             </Sheet>
 
-            <Link to="/" className="flex items-center gap-2">
-              <img src="/logo.webp" alt="FileTransfer Logo" className="h-9 w-9 object-contain" />
-              <span className="font-semibold hidden sm:inline-block">FileTransfer</span>
-            </Link>
+            <div className="flex items-center gap-2">
+  <Link to="/" className="hidden sm:flex items-center gap-2">
+    <img src="/logo.webp" alt="FileTransfer Logo" className="h-9 w-9 object-contain" />
+    <span className="font-semibold">FileTransfer</span>
+  </Link>
+
+  {/* Architecture Image Button */}
+  <Dialog>
+    <DialogTrigger asChild>
+      <Button
+        variant="outline"
+        size="sm"
+        className="flex items-center gap-2 h-8 px-2 sm:px-3"
+      >
+        <ImageIcon className="h-4 w-4" />
+        <span className="hidden sm:inline">Architecture</span>
+      </Button>
+    </DialogTrigger>
+
+    <DialogContent className="max-w-[95vw] sm:max-w-4xl max-h-[90vh] overflow-auto">
+      <DialogHeader>
+        <DialogTitle>FileTransfer Architecture</DialogTitle>
+      </DialogHeader>
+
+      <img
+        src="/File_Transfer.png"
+        alt="FileTransfer Architecture"
+        className="w-full h-auto rounded-lg border"
+      />
+    </DialogContent>
+  </Dialog>
+</div>
+
           </div>
 
           {/* Search */}
